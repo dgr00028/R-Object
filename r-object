@@ -1,0 +1,91 @@
+x=c(17,6,20,24,22,15,21,18)
+x[x>=20]
+y<-rep(0,length(x))
+for(i in 1:length(x)){
+       if(x[i]>= 20){
+    y[i]=100
+        }else if(x[i]<20){
+    y[i]=x[i]
+  }
+}
+
+a=c(3:7)
+x=diag(x=a, 5,5)
+for(i in 1:5){
+  for(j in 1:5){
+    if(i!=j){
+      x[i,j]=-1
+    }
+  }
+}
+
+y<-x[,-5]
+
+yinfo = c(nrow(y),ncol(y))
+
+
+y1<-y
+for(i in 1: nrow(y)){
+  for(j in 1: ncol(y)){
+    if(y[i,j]==-1){
+      y1[i,j]=0
+    }
+  }
+}
+
+v_txt=sample(1:10,400,replace = T)
+v=matrix(v_txt,nrow=100,ncol=4)
+for(i in 1:100){
+  for(j in 1: 4){
+    if(v[i,j]==1){
+      v[i,j]=NA
+    }
+  }
+}
+colnames(v)=c("v1","v2","v3","v4")
+write.table(v, file="rowdata.txt", row.names = F, na="", sep = " ")
+
+rdata=read.table("c:\\tmp\\rowdata.txt",header = T, sep" ")
+
+N_TF=function(j,i){
+  return(is.na(rdata[[j]][i]))   
+  }
+
+which(!is.na(rdata[[2]])&!is.na(rdata[[3]]))
+
+a=which(!is.na(rdata[[2]])&!is.na(rdata[[3]]))
+rdata1=cbind.data.frame(rdata$v2[a],rdata$v3[a])
+
+temp <- vector(mode = 'list', length = 7)
+temp[[1]]<-c(TRUE, FALSE)
+temp[[2]]<-diag(x=1,2)
+temp[[3]]<-seq(from= 0, to= 1,length=100)
+for(i in 4: 7){
+  temp[[i]]<- i-3
+}
+temp
+
+temp[[2]]<-NULL
+
+temp[[3]]
+
+length(temp)
+
+a1<- -1:2
+a2<- 1:2
+a1+a2
+
+a1<- -(1:2)
+a2<- 1:2
+a1+a2
+
+a1<- matrix(0,2,2)
+a2<- c(3,4)
+a1+a2
+
+a1<- matrix(1:4,2,2)
+a1[a1>2]=0
+a1
+
+a1<- 1:5
+a1[-1]-a1[-length(a1)]
