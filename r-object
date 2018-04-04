@@ -1,0 +1,97 @@
+a=function(n){
+  if(n==1)
+    return(1)
+  else if(n==2)
+    return(3)
+  else{
+    return(0.9*a(n-1)-0.1*a(n-2)+1)
+  }
+}
+a(20)
+
+for(n in 1:20){
+  if(a(n)>4)
+   {print(n) 
+    break
+  }
+}
+
+
+A=matrix(runif(100),50,5)
+v=rep(0,length=50)
+for (i in 1: 50) {
+  v[i]=sum(A[i,])
+}
+
+tmp= rep(0,10)
+a<-10:1
+idx=1
+for (j in a) {
+  if(j<5)
+  {
+    tmp[idx]<-a[j]
+    idx<-idx+1 }
+}
+tmp
+
+
+x=matrix(0,1000,5)
+x[,1]<-sample(20:80,1000, replace= TRUE)
+x[,2]<-sample(150:200,1000, replace = TRUE)
+x[,3]<-sample(30:120,1000,replace = TRUE)
+x[,4]<-sample(1:100, 1000,replace = TRUE)
+x[,5]<-sample(200:320, 1000,replace = TRUE)
+A= sample(1:10, 1000, replace = TRUE )
+sid=function(i){
+  for(i in 1: 1000){
+  return(A[i])}}
+sid(1)
+
+m.mat = matrix(rep(0,50),10,5)
+
+for(i in 1:10)
+{
+  a = c((which(sid==i)))
+  s_data <- rep(0,5) 
+  for(j in a)
+  {
+    s_data = s_data + x[j,]
+  }
+  m.mat[i,] = s_data / length(a) 
+}
+m.mat
+
+idist <- matrix(rep(0,10000),1000,10)
+for(i in 1:1000)
+{
+  a = x[i,] 
+
+  for(j in 1:10)
+  {
+    b = m.mat[sid[j],]
+    xy = 0
+    xx = 0
+    yy = 0
+    for(k in 1:5)
+    {
+      xy = xy + a[k]*b[k]
+      xx = xx + a[k]^2
+      yy = yy + b[k]^2
+    }
+    idist[i,j] <- xy/(sqrt(xx*yy))
+  }
+}
+idist
+
+ivec <- vector()
+for(i in 1:1000)
+{
+  ivec[i] <- which.min(idist[i,])
+}
+ivec
+
+v=c()
+for(i in 1:1000){
+  if (length(a[[i]])==2)
+  v<-c(v,i)}
+length(v)
